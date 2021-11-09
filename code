@@ -1,0 +1,89 @@
+"""
+Director is the soul of a film. In the IMDB’s top 1000 films, there are many directors have more than one film ranked in. 
+In this function the directors who have the most films ranked in, and whose films have the highest average IMDB rating would be obtained.
+"""
+
+import csv
+
+class Film:     #contains the data about a film
+    def __init__(self, title, ReleaseYear, runtime, IMDBrating, director):    #These values will be stored as instance variables.
+        self.title = title
+        self.ReleaseYear = ReleaseYear
+        self.runtime = runtime
+        self.IMDBrating = IMDBrating
+        self.director = director
+     
+    def getTitle(self):     #getter methods for each of the instance variables
+        return self.title
+    
+    def getReleaseYear(self):
+        return self.ReleaseYear
+    
+    def getRuntime(self):
+        return self.runtime  
+                
+    def getIMDBrating(self):
+        return self.IMDBrating
+               
+    def getdirector(self):
+        return self.director                 
+    
+
+class Films:
+    def __init__(self):        
+        self.list = []   #an instance variable that is a list containing Film objects.
+        
+    def readFile(self):
+        path = input("please input the file path:")  #import the imdb_top_1000.csv
+        infile = open(path, "r", encoding='utf-8') 
+        self.file= csv.DictReader(infile)   
+        """In the Q1 I use readlines function to read the file line by line and split the items by ",", 
+        however in the item of Overview there are too many comma in the string, therefore I have to 
+        use csv.dictreader in the library to maps the information in each row to a dictionary whose 
+        keys are given by the header line."""
+
+    def createFilmsList(self):
+        for row in self.file:   #process the row
+            myfilm = Film(row["Series_Title"], row["Released_Year"], row["Runtime"], row["IMDB_Rating"], row["Director"]) 
+            #for each row in the dictionary, each value is mapped to the parameter in the header
+            self.list.append(myfilm)    #append this Film object to the list as self.list.
+           
+    def getFilmsList(self):
+        return self.list
+
+print("input main() to start")
+def main():
+    films = Films()     #creates a Films object
+    films.readFile()    #call the readfile method of the Films object to read the file
+    films.createFilmsList()   #call the createFilmsList method to create the list inside the Films object
+    directorCount = {}  #the dictionary to count the times of a director's name
+    totalRating = {}    #the dictionary to sum up all the rating score of a director
+    avgRating = {}      #the dictionary to calculate the average rating of a director
+    for i in films.list:    
+        directorCount[i.getdirector()] = 0  #to create the initial record of each director
+        totalRating[i.getdirector()] = 0    #to create the initial record of each director
+    for i in films.list:
+        directorCount[i.getdirector()] = directorCount[i.getdirector()] + 1
+        #each time the director's name appear in a Film object, the count will plus 1
+        totalRating[i.getdirector()] = totalRating[i.getdirector()] + eval(i.getIMDBrating())
+        #each time the director's name appear in a Film object, its rating value would be added up
+        avgRating[i.getdirector()] = totalRating[i.getdirector()] / directorCount[i.getdirector()] 
+        #to calculate the average rating from the value of count and total rating
+    
+    mostProductive = max(directorCount, key = directorCount.get)
+    #get the key that has the maximun value in the directorCount dictionary
+    mostCount = directorCount[mostProductive]
+    #get the value of the most productive director in the directorCount dictionary
+    mostHonorable = max(avgRating, key = avgRating.get)
+    #get the key that has the maximun value in the avgRating dictionary
+    topRating = avgRating[mostHonorable]
+    #get the value of the most honorable director in the avgRating dictionary
+    
+    print(mostProductive, "has most works ranked in, as", mostCount, "films in the IMDB top 1000.")
+    print(mostHonorable, "has the highest average IMDB rating as", topRating,".")
+    
+
+        
+        
+        
+        
