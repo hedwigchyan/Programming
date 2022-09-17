@@ -1,6 +1,7 @@
+This is a program to analyse the IMBD movie file
+
 The classes for this program:
-• Films: This class will hold an instance variable that is a list containing Film
-objects.
+• Films: This class will hold an instance variable that is a list containing Film objects.
 The Films class has the following methods:
 – readFile: This takes a single parameter that is the string path to the location
 of the file containing film information. The file will be stored as an
