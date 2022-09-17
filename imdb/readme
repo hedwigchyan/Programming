@@ -1,1 +1,22 @@
-this is an exercise of class, object and dictionary in Python
+The classes for this program:
+• Films: This class will hold an instance variable that is a list containing Film
+objects.
+The Films class has the following methods:
+– readFile: This takes a single parameter that is the string path to the location
+of the file containing film information. The file will be stored as an
+instance variable
+– createFilmsList: This method will access the instance variable containing
+the file information and append Film objects to the list created in the constructor. 
+This should not create a Film object for the header in the file.
+– getFilmsList: This takes no parameters and returns the instance variable containing the list of Film objects.
+• Film: This class contains the data about a film. In the constructor it will
+be passed the title, year of release and runtime. These will be stored as instance
+variables. The Film class will also contain getter methods for each of the
+instance variables. e.g getTitle() etc.
+
+
+Methods:
+• Creates a Films object that will hold the data about the IMDB Top 1000 films (from imdb.csv.)
+• Print to the screen the string representations of the films that have a runtime of less than 
+70 minutes and any films in the list published after 2019, in the following format for each Film:
+“The Shawshank Redemption was released in 1994 and has a runtime of 142 minutes.”
