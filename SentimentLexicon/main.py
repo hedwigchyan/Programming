@@ -45,7 +45,12 @@ class Classifier:
             finalscore = 0
         return(finalscore)      #after running this function, the final score would be returned
 
+
+
+#To test this program, this is a main method that creates a Classifier object and iteratively classifies each of the following sentences
+
 print("input main() to start")
+
 def main():
     sl = SentimentLexicon()     #creates a SentimentLexicon object
     sl.makerecord()    #call the makerecord method to create the dictionary inside the SentimentLexicon object
