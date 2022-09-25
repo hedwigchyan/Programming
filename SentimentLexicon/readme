@@ -1,1 +1,3 @@
-A program to analyse the sentiment of a piece of text
+A program to analyse the sentiment of a piece of text.
+
+For a string, each word in it would be looked up in the sentiment lexicon, and a total score would be calculated by summing the values for each word.
